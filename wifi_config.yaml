@@ -1,0 +1,11 @@
+wifi:
+  ssid: "ivy-275-0028"
+  password: "epimetheus@0030"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: " Fallback Hotspot"
+    password: "ivy-275-0028"
+    ap_timeout: 15s
+
+captive_portal:

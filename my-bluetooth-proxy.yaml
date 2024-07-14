@@ -1,0 +1,35 @@
+substitutions:
+  name: my-bluetooth-proxy
+  board: esp32-s3-devkitc-1
+
+esphome:
+  name: ${name}
+
+esp32:
+  board: ${board}
+  variant: esp32s3
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+# Over the Air Updates
+ota:
+  platform: esphome
+
+# Include WiFi configuration from an external file
+<<: !include wifi_config.yaml
+
+# Bluetooth Proxy configuration
+esp32_ble_tracker:
+#  scan_parameters:
+#    interval: 1100ms
+#    window: 1100ms
+
+bluetooth_proxy:
+  active: true
+  cache_services: true
