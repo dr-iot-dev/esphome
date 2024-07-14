@@ -3,7 +3,7 @@ substitutions:
   device_name: "atoms3-lite-ard"
   device_friendly_name: "AtomS3 Lite"
   device_description: "M5Stack AtomS3 Lite"
-#  time_timezone: "Asia/Jerusalem"
+  time_timezone: "Asia/Tokyo"
 
 esphome:
   name: ${device_name}
@@ -35,7 +35,7 @@ captive_portal:
 # Enable logging
 logger:
   # baud_rate: 0
-  level: VERBOSE
+  # level: VERBOSE
 
 # Enable Home Assistant API
 api:
@@ -51,13 +51,9 @@ esp32_ble_tracker:
   on_ble_advertise:
     then:
       output.turn_on: status_output
-    #  - lambda: |-
-    #      id(status_output).turn_on();
   on_scan_end: 
     then:
       output.turn_off: status_output
-    #  - lambda: |-
-    #      id(status_output).turn_off();
 
 bluetooth_proxy:
   active: true
@@ -72,8 +68,7 @@ output:
         condition:
           lambda: return (state);
         then:
-          - logger.log: Light on
-          #- output.turn_on: status_output
+          # - logger.log: Light on
           - light.turn_on:
               id: status_led
               brightness: 70%
@@ -81,21 +76,20 @@ output:
               green: 0%
               blue: 0%
               transition_length: 0s
-          - delay: 500ms
+          - delay: 10ms
           - light.turn_off:
               id: status_led
               transition_length: 0s
         else:
-          - logger.log: Light off
-          #- output.turn_off: status_output
+          # - logger.log: Light off
           - light.turn_off: 
               id: status_led
               transition_length: 0s
 
 #G4=IR
-remote_transmitter:
-  pin: GPIO4
-  carrier_duty_percent: 50%
+#remote_transmitter:
+#  pin: GPIO4
+#  carrier_duty_percent: 50%
 
 
 #G35=RGB WS2812B-2020
@@ -108,23 +102,6 @@ light:
     rmt_channel: 1
     id: status_led
     name: ${device_friendly_name} RGB LED
-
-#light:
-#  # Enable status LED
-#  - platform: status_led
-#    output: status_output
-#    name: "Status Led"
-#    internal: True
-#  #G35=RGB WS2812C-2020
-#  - platform: esp32_rmt_led_strip
-#    rgb_order: GRB
-#    pin: 35
-#    num_leds: 4
-#    # RMT 0 channels will be occupied by IR
-#    rmt_channel: 1
-#    chipset: ws2812
-#    id: led
-#    name: "Led"
 
 #G41=Button
 binary_sensor:
