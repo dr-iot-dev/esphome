@@ -28,7 +28,8 @@ wifi:
   ap:
     ssid: ${device_name}
     password: !secret wifi_fallback_password
-    ap_timeout: 15s
+    ap_timeout: 15s2
+    
  
 captive_portal:
  
@@ -39,7 +40,6 @@ logger:
 
 # Enable Home Assistant API
 api:
-
 
 ota:
   platform: esphome
@@ -114,6 +114,7 @@ light:
     rmt_channel: 1
     id: status_led
     name: ${device_friendly_name} RGB LED
+    internal: True
 
 #G41=Button
 binary_sensor:
